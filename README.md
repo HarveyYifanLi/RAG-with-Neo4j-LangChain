@@ -22,15 +22,15 @@ This is a prototype LangChain system that provides grounding for an LLM using RA
   
   4. Create a LangChain retriever from the vector index:
   
-  Create a Neo4jVector Retriever from the new vector index
+  Create a `Neo4jVector` Retriever from the new vector index
   
   5. Create a LangChain RetrievalQA chain:
   
-  Create the RetrievalQA chain using the Neo4jVector retriever
+  Create the `RetrievalQA` chain using the `Neo4jVector` retriever
   
   6. Create a LangChain Agent from an LLM chat model:
   
-  Create an agent from an LLM chat model and a new LangChain tool to use the RetrievalQA chain, which can then be invoked by issuing queries to it
+  Create an `agent` from an LLM chat model and a new LangChain tool to use the `RetrievalQA` chain, which can then be invoked by issuing queries to it
   
   -> Now the LLM chat model is grounded with realistic data from the GraphDB
 
@@ -54,7 +54,7 @@ Then put relevant credentials in the `.env` file (by modifying the `.env.example
 
   6. Generate vector embeddings and create a vector index for it in Neo4j using OpenAI:
      
-   - Run command: `python<version> openai_embeddings.py` and it will do:
+   - Run command: `python<version> openai_embeddings.py` and it will:
      - use OpenAI to generate a vector embedding for the `tagline` property (if it exists) of `movie` Nodes in Neo4j then save them as rows in a csv file, which could be loaded into Neo4j for further processing
        
        ```
@@ -67,7 +67,17 @@ Then put relevant credentials in the `.env` file (by modifying the `.env.example
      - create a vector index `movieTaglineIdx` in Neo4j for this new vector property that's used for the embedding, so as to do search across these embeddings
      - (and finally also do a test query using the created vector index to find the closest embedding matches to a given embedding)
 
+  7. Create a LLMChain, a RetrievalQA Chain from the Neo4jVector retriever based on the vector index and an agent to use the RetrievalQA chain as a tool:
 
-  
+     - Run command: `python<version> neo4jvector_retriever_chain_with_agent.py` and it will:
+       - create and use an `LLMChain` from an OpenAI chat model that supports a Conversation Buffer memory
+       - Create a `Neo4jVector` Retriever from the new vector index
+       - Create the `RetrievalQA` chain using the `Neo4jVector` retriever
+       - Create an `agent` from the LLM chat model and a new LangChain tool to use the `RetrievalQA` chain, which can then be invoked by issuing queries to it
+
+  8. Now feel free to interact with the grounded LLM:
+
+      ![image](https://github.com/HarveyYifanLi/RAG-with-Neo4j-LangChain/assets/17951024/eacede0f-1e47-44f0-b57a-42d1127359a5)
+
 
   
