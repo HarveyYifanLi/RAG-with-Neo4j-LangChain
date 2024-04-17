@@ -35,24 +35,38 @@ This is a prototype LangChain system that provides grounding for an LLM using RA
   -> Now the LLM chat model is grounded with realistic data from the GraphDB
 
 ### Steps of execution
-  1. Install [Neo4j Desktop] (https://neo4j.com/download/) and load some sample data by running `load-movies.cypher` in the Neo4j browser
+  1. Install [Neo4j Desktop](https://neo4j.com/download/) and load some sample data by running `load-movies.cypher` in the Neo4j browser
 
-  2. Make sure you've signed up for [OpenAI] (https://openai.com/blog/openai-api) and [Comet] (https://www.comet.com/signup?utm_source=mit_dl&utm_medium=partner&utm_content=github) and obtained the API keys.
+  2. Make sure you've signed up for [OpenAI](https://openai.com/blog/openai-api) and [Comet](https://www.comet.com/signup?utm_source=mit_dl&utm_medium=partner&utm_content=github) and obtained the API keys.
 Then put relevant credentials in the `.env` file (by modifying the `.env.example` file)
    
   3. Clone this repo and cd into its working directory
    
   4. Install, create and activate a Python virtual environment:
      
-   -> You can install the virtualvenv Python tool to your host Python by running this command: `pip install virtualenv`
+   - You can install the virtualvenv Python tool to your host Python by running this command: `pip install virtualenv`
    
-   -> Create a virtual environment by running this: `python<version> -m venv <virtual-environment-name>`
+   - Create a virtual environment by running this: `python<version> -m venv <virtual-environment-name>`
    
-   -> On a Mac, to activate this virtual environment run: `source <virtual-environment-name>/bin/activate`
+   - On a Mac, to activate this virtual environment run: `source <virtual-environment-name>/bin/activate`
 
   5. Install all the Python dependencies via: `pip install -r requirements.txt`
 
-  6. 
+  6. Generate vector embeddings and create a vector index for it in Neo4j using OpenAI:
+     
+   - Run command: `python<version> openai_embeddings.py` and it will do:
+     - use OpenAI to generate a vector embedding for the `tagline` property (if it exists) of `movie` Nodes in Neo4j then save them as rows in a csv file, which could be loaded into Neo4j for further processing
+       
+       ```
+       LLM providers typically expose API endpoints that convert a chunk of text into a vector embedding.
+       Depending on the provider, the shape and size of the vector may differ.
+       For example, OpenAI’s text-embedding-ada-002 embedding model converts text into a vector of 1,536 dimensions.
+        ```
+
+     - load OpenAI vector embedding as a new vector property `taglineEmbedding` onto the `movie` Node in Neo4j (by reading/loading the csv file)
+     - create a vector index `movieTaglineIdx` in Neo4j for this new vector property that's used for the embedding, so as to do search across these embeddings
+     - (and finally also do a test query using the created vector index to find the closest embedding matches to a given embedding)
+
 
   
 
