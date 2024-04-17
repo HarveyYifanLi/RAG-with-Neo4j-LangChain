@@ -95,29 +95,29 @@ def execute_cypher_query(limit=None, query=""):
 
 # use OpenAI to generate a vector embedding for the tagline property (if it exists) of movie Nodes in Neo4j
 # then save them as rows in a csv file, which could be loaded into Neo4j for further processing
-# generate_embeddings('./data/movie-plot-embeddings.csv')
+generate_embeddings('./data/movie-plot-embeddings.csv')
 
 # load OpenAI vector embedding as a new vector property onto the movie Node in Neo4j (by reading/loading the csv file)
-# execute_cypher_query(query="""
-#     LOAD CSV WITH HEADERS
-#     FROM 'file:///movie-plot-embeddings.csv'
-#     AS row
-#     MATCH (m:Movie)
-#     WHERE id(m) = toInteger(row.movieId)
-#     CALL db.create.setNodeVectorProperty(m, 'taglineEmbedding', apoc.convert.fromJsonList(row.embedding))
-#     RETURN count(*)
-# """)
+execute_cypher_query(query="""
+    LOAD CSV WITH HEADERS
+    FROM 'file:///movie-plot-embeddings.csv'
+    AS row
+    MATCH (m:Movie)
+    WHERE id(m) = toInteger(row.movieId)
+    CALL db.create.setNodeVectorProperty(m, 'taglineEmbedding', apoc.convert.fromJsonList(row.embedding))
+    RETURN count(*)
+""")
 
 # create a vector index in Neo4j for this new vector property that's used for the embedding, so as to search across these embeddings
-# execute_cypher_query(query="""
-#     CREATE VECTOR INDEX movieTaglineIdx IF NOT EXISTS
-#     FOR (m:Movie)
-#     ON m.taglineEmbedding
-#     OPTIONS {indexConfig: {
-#     `vector.dimensions`: 1536,
-#     `vector.similarity_function`: 'cosine'
-#     }}
-# """)
+execute_cypher_query(query="""
+    CREATE VECTOR INDEX movieTaglineIdx IF NOT EXISTS
+    FOR (m:Movie)
+    ON m.taglineEmbedding
+    OPTIONS {indexConfig: {
+    `vector.dimensions`: 1536,
+    `vector.similarity_function`: 'cosine'
+    }}
+""")
 
 # finally query the created vector index so to find the closest embedding matches to a given embedding
 execute_cypher_query(query="""
