@@ -35,10 +35,10 @@ This is a prototype LangChain system that provides grounding for an LLM using RA
   -> Now the LLM chat model is grounded with realistic data from the GraphDB
 
 ### Steps of execution
-  1. Install Neo4j Desktop (https://neo4j.com/download/) and load some sample data by running `load-movies.cypher` in the Neo4j browser
+  1. Install [Neo4j Desktop] (https://neo4j.com/download/) and load some sample data by running `load-movies.cypher` in the Neo4j browser
 
-  2. Make sure you've signed up for OpenAI (https://openai.com/blog/openai-api) and Comet (https://www.comet.com/signup?utm_source=mit_dl&utm_medium=partner&utm_content=github) and obtained the API keys.
-Then put relevant credentials in the `.env` file
+  2. Make sure you've signed up for [OpenAI] (https://openai.com/blog/openai-api) and [Comet] (https://www.comet.com/signup?utm_source=mit_dl&utm_medium=partner&utm_content=github) and obtained the API keys.
+Then put relevant credentials in the `.env` file (by modifying the `.env.example` file)
    
   3. Clone this repo and cd into its working directory
    
