@@ -69,11 +69,11 @@ Then put relevant credentials in the `.env` file (by modifying the `.env.example
 
   7. Create a LLMChain, a RetrievalQA Chain from the Neo4jVector retriever based on the vector index and an agent to use the RetrievalQA chain as a tool:
 
-     - Run command: `python<version> neo4jvector_retriever_chain_with_agent.py` and it will:
-       - create and use an `LLMChain` from an OpenAI chat model that supports a Conversation Buffer memory
-       - Create a `Neo4jVector` Retriever from the new vector index
-       - Create the `RetrievalQA` chain using the `Neo4jVector` retriever
-       - Create an `agent` from the LLM chat model and a new LangChain tool to use the `RetrievalQA` chain, which can then be invoked by issuing queries to it
+   - Run command: `python<version> neo4jvector_retriever_chain_with_agent.py` and it will:
+      - create and use an `LLMChain` from an OpenAI chat model that supports a Conversation Buffer memory
+      - Create a `Neo4jVector` Retriever from the new vector index
+      - Create the `RetrievalQA` chain using the `Neo4jVector` retriever
+      - Create an `agent` from the LLM chat model and a new LangChain tool to use the `RetrievalQA` chain, which can then be invoked by issuing queries to it
 
   8. Now feel free to interact with the grounded LLM:
 
