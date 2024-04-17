@@ -36,12 +36,24 @@ This is a prototype LangChain system that provides grounding for an LLM using RA
 
 ### Steps of execution
   1. Install Neo4j Desktop (https://neo4j.com/download/) and load some sample data by running `load-movies.cypher` in the Neo4j browser
+
+  2. Make sure you've signed up for OpenAI (https://openai.com/blog/openai-api) and Comet (https://www.comet.com/signup?utm_source=mit_dl&utm_medium=partner&utm_content=github) and obtained the API keys.
+Then put relevant credentials in the `.env` file
    
-  2. Clone this repo and cd into its working directory
+  3. Clone this repo and cd into its working directory
    
-  3. Install, create and activate a Python virtual environment:
+  4. Install, create and activate a Python virtual environment:
+     
    -> You can install the virtualvenv Python tool to your host Python by running this command: `pip install virtualenv`
+   
    -> Create a virtual environment by running this: `python<version> -m venv <virtual-environment-name>`
+   
    -> On a Mac, to activate this virtual environment run: `source <virtual-environment-name>/bin/activate`
+
+  5. Install all the Python dependencies via: `pip install -r requirements.txt`
+
+  6. 
+
+  
 
   
