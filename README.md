@@ -3,6 +3,10 @@ This is a prototype LangChain system that provides grounding for an LLM using RA
 
 ![image](https://github.com/HarveyYifanLi/RAG-with-Neo4j-LangChain/assets/17951024/f366ed80-b347-4862-924b-dba72f88f0c5)
 
+### Background
+  Retrieval-Augmented Generation (RAG) is the process/technique of optimizing the output of a large language model by referencing an authoritative knowledge base outside of its 
+  training data before generating a response which as a result overcomes the so-called LLM Hallucination problem. This process is also more generally known as grounding an LLM.
+  This app focuses on grounding an LLM with the authoritative data source being a Graph Database such as Neo4j; therefore, it assumes you already have a GraphDB available for connection. It uses a sample Movie dataset as an example and so please feel free to update the data Node's Label and Property names to cater to your use case.
 
 ### Workflow
   You have a GraphDB (e.g. Neo4J) and want to utilize its valuable data (e.g. relationships between data nodes) to provide grounding to
