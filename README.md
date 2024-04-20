@@ -9,7 +9,7 @@ This is a prototype LangChain system that provides grounding for an LLM using RA
   This app focuses on grounding an LLM with the authoritative data source being a Graph Database such as Neo4j; therefore, it assumes you already have a GraphDB available for connection. It uses a sample Movie dataset as an example and so please feel free to update the data Node's Label and Property names to cater to your use case.
 
 ### Workflow
-  You have a GraphDB (e.g. Neo4J) and want to utilize its valuable data (e.g. relationships between data nodes) to provide grounding to
+  You have a GraphDB (e.g. Neo4j) and want to utilize its valuable data (e.g. relationships between data nodes) to provide grounding to
   an LLM chatbot that your app is connected to. Below is one possible high-level workflow for achieving this.
   
   1. Decide Labels and Properties:
@@ -71,7 +71,7 @@ Then put relevant credentials in the `.env` file (by modifying the `.env.example
      - create a vector index `movieTaglineIdx` in Neo4j for this new vector property that's used for the embedding, so as to do search across these embeddings
      - (and finally also do a test query using the created vector index to find the closest embedding matches to a given embedding)
 
-  7. Create a LLMChain, a RetrievalQA Chain from the Neo4jVector retriever based on the vector index and an agent to use the RetrievalQA chain as a tool:
+  7. Create an LLMChain, a RetrievalQA Chain from the Neo4jVector retriever based on the vector index and an agent to use the RetrievalQA chain as a tool:
 
    - Run command: `python<version> neo4jvector_retriever_chain_with_agent.py` and it will:
       - create and use an `LLMChain` from an OpenAI chat model that supports a Conversation Buffer memory
